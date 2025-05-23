@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiMail, FiSearch, FiUser } from "react-icons/fi";
+import { FiSearch, FiUser } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import PropertyCard from "../../components/Card/PropertyCard";
+import TestCard from "../../components/Card/TestCard";
 
 const Services = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true); // Replace with real auth
@@ -28,16 +29,14 @@ const Services = () => {
   }
 
   return (
-    <>
+    <div>
       <div
-        className="min-h-screen bg-cover bg-center "
-        style={{ backgroundImage: `url('/Images/Service_bg.png')` }}
+        className="min-h-screen bg-cover bg-center mt-20 "
+        style={{
+          backgroundImage: `url('/Images/Service_bg.png')`,
+        }}
       >
         <div className="w-full flex justify-end items-center p-4 gap-3 shadow-sm text-sm">
-          <button className="border border-gray-400 text-gray-800 hover:text-red-600 px-4 py-1 rounded hover:bg-gray-100 flex items-center gap-2">
-            <FiMail />
-            Subscribe
-          </button>
           <a
             href="https://wa.me/15551234567"
             target="_blank"
@@ -60,10 +59,10 @@ const Services = () => {
 
         {/* search bar */}
 
-        <div className="bg-white shadow-lg rounded-full px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2 pl-10 w-[90%] max-w-5xl mx-auto">
+        <div className="bg-white shadow-lg rounded-full px-4 py-2  flex flex-col md:flex-row items-center justify-between gap-2 pl-10 w-[90%] max-w-5xl mx-auto">
           {/* Project Type */}
           <div className="flex flex-col text-sm w-full border-r-2 border-gray-500  md:w-1/4 ">
-            <label className="text-gray-700 font-medium">Project Type</label>
+            <div className="text-gray-700 font-medium">Project Type</div>
             <select
               value={searchParams.type}
               onChange={(e) =>
@@ -78,32 +77,30 @@ const Services = () => {
           </div>
 
           {/* Location */}
-          <div className="flex flex-col text-sm w-full md:w-1/4">
-            <label className="text-gray-700 font-medium">
-              <IoIosArrowDown className="text-lg" /> Location
-            </label>
+          <div className="flex flex-col text-sm w-full border-r-2 border-gray-500 md:w-1/4">
+            <div className="text-gray-700 font-medium">Location</div>
+            <div className="flex justify-start items-center gap-2">
+              <select
+                value={searchParams.price}
+                onChange={(e) =>
+                  setSearchParams({ ...searchParams, price: e.target.value })
+                }
+                className="appearance-none border-none text-gray-600 focus:outline-none"
+              >
+                <option>Banani, Dhaka</option>
+                <option>Gulshan, Dhaka</option>
+                <option>Dhanmondi, Dhaka</option>
+                <option>Uttara, Dhaka</option>
+                <option>Mirpur, Dhaka</option>
+              </select>
 
-            <select
-              value={searchParams.location}
-              onChange={(e) =>
-                setSearchParams({ ...searchParams, location: e.target.value })
-              }
-              className="appearance-none bg-transparent border-none text-gray-600 focus:outline-none flex justify-start items-center"
-            >
-              <div className="div">
-                <option>Columbus</option>
-                <option>Miami</option>
-                <option>New York</option>
-              </div>
-              <label className="text-gray-500">
-                <IoIosArrowDown className="text-lg" />
-              </label>
-            </select>
+              <IoIosArrowDown className="text-lg" />
+            </div>
           </div>
 
           {/* Max Price */}
           <div className="flex flex-col text-sm w-full md:w-1/4">
-            <label className="text-gray-700 font-medium">Max Price</label>
+            <div className="text-gray-700 font-medium">Max Price</div>
             <div className="flex justify-start items-center gap-2">
               <select
                 value={searchParams.price}
@@ -117,9 +114,8 @@ const Services = () => {
                 <option>$1000–$2000</option>
                 <option>$2000+</option>
               </select>
-              <label className="text-gray-500">
-                <IoIosArrowDown className="text-lg" />
-              </label>
+
+              <IoIosArrowDown className="text-lg" />
             </div>
           </div>
 
@@ -132,15 +128,16 @@ const Services = () => {
             Search
           </button>
         </div>
-
-        {/* Results */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-6xl mx-auto">
-          {results.map((item, index) => (
-            <PropertyCard key={index} />
-          ))}
-        </div>
       </div>
-    </>
+      {/* example only */}
+      <TestCard />
+      {/* Results */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-6xl mx-auto">
+        {results.map((item, index) => (
+          <PropertyCard key={index} />
+        ))}
+      </div>
+    </div>
   );
 };
 

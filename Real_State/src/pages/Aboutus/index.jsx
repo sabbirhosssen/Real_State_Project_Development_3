@@ -1,9 +1,9 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Aboutus = () => {
   return (
     <>
-      <section className="py-16 px-6 md:px-20 bg-white text-gray-800">
+      <section className="pt-24 py-16 px-6 md:px-20 bg-white text-gray-800">
         {/* Section Title */}
         <h2 className="text-2xl md:text-4xl font-semibold text-center mb-12">
           Transforming Homes and <br /> Creating Dream Spaces
@@ -53,9 +53,11 @@ const Aboutus = () => {
 
         {/* Button */}
         <div className="text-center">
-          <button className="border border-black px-6 py-3 text-sm rounded hover:bg-black hover:text-white transition">
-            Contact Us
-          </button>
+          <Link to="/contact">
+            <button className="border border-black px-6 py-3 text-sm rounded hover:bg-black hover:text-white transition">
+              Contact Us
+            </button>
+          </Link>
         </div>
       </section>
     </>

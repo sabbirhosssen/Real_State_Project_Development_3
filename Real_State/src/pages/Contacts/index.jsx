@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    mobile: "",
-    email: "",
+    contactName: "",
+    contactEmail: "",
+    contactPhone: "",
+    contactAddress: "",
+    contactMessage: "",
     password: "",
   });
 
-  // Handle input change
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // If mobile changes, also update password to match
-    if (name === "mobile") {
+    // Auto-set password = contactPhone
+    if (name === "contactPhone") {
       setFormData((prev) => ({
         ...prev,
-        mobile: value,
-        password: value, // password same as mobile
+        contactPhone: value,
+        password: value,
       }));
     } else {
       setFormData((prev) => ({
@@ -27,78 +32,133 @@ const Contacts = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted:", formData);
-    // You can handle form submission here
+    setIsSubmitting(true);
+    setResponseMessage("");
+
+    try {
+      // const response = await axios.post(
+      //   "http://localhost:8080/api/contact",
+      //   formData
+      // );
+      await axios.post("http://localhost:8080/api/contact", formData);
+
+      // Update the endpoint as needed
+      setResponseMessage("Contact submitted successfully!");
+      alert("Contact submitted successfully!");
+      // console.log("Success:", response.data);
+
+      // Optionally reset form
+      setFormData({
+        contactName: "",
+        contactEmail: "",
+        contactPhone: "",
+        contactAddress: "",
+        contactMessage: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      setResponseMessage("Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
   return (
-    <div>
-      <section className="max-w-xl mx-auto p-6 mt-10  shadow-md rounded-xl">
-        <h2 className="text-2xl font-semibold text-center mb-6">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
-            />
-          </div>
+    <section className="pt-20 max-w-xl mx-auto py-16 px-6 mt-10 shadow-md rounded-xl bg-white">
+      <h2 className="text-2xl font-semibold text-center mb-6">Contact Us</h2>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Mobile Number
-            </label>
-            <input
-              type="tel"
-              name="mobile"
-              value={formData.mobile}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
-            />
-          </div>
+      {responseMessage && (
+        <div className="mb-4 text-center text-sm text-green-600">
+          {responseMessage}
+        </div>
+      )}
 
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
-            />
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <div className="block text-sm font-medium mb-1">Full Name</div>
+          <input
+            type="text"
+            name="contactName"
+            placeholder="Enter your name"
+            value={formData.contactName}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
+          />
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Password (auto set to Mobile)
-            </label>
-            <input
-              type="text"
-              name="password"
-              value={formData.password}
-              readOnly
-              className="w-full px-4 py-2 bg-gray-100 border rounded-md outline-none"
-            />
-          </div>
+        <div>
+          <div className="block text-sm font-medium mb-1">Email</div>
+          <input
+            type="email"
+            name="contactEmail"
+            placeholder="Enter your email"
+            value={formData.contactEmail}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
+          />
+        </div>
 
-          <button
-            type="submit"
-            className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition"
-          >
-            Submit
-          </button>
-        </form>
-      </section>
-    </div>
+        <div>
+          <div className="block text-sm font-medium mb-1">Mobile Number</div>
+          <input
+            type="tel"
+            name="contactPhone"
+            placeholder="+880..."
+            value={formData.contactPhone}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
+          />
+        </div>
+
+        <div>
+          <div className="block text-sm font-medium mb-1">Your Address</div>
+          <textarea
+            name="contactAddress"
+            placeholder="Enter your address"
+            value={formData.contactAddress}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <div className="block text-sm font-medium mb-1">Your Message</div>
+          <textarea
+            name="contactMessage"
+            placeholder="Enter your message"
+            value={formData.contactMessage}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md outline-none focus:ring focus:ring-red-200"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+
+        <div className="hidden">
+          <input
+            type="text"
+            name="password"
+            value={formData.password}
+            readOnly
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition"
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
+      </form>
+    </section>
   );
 };
 

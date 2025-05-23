@@ -1,12 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
+import Customizeai from "./components/Dashboard/Customizeai/Customizeai";
 import "./index.css";
+import Dashboard from "./layouts/Dashboard";
 import Aboutus from "./pages/Aboutus";
-import Blogs from "./pages/Blogs";
 import Contacts from "./pages/Contacts";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
+import Settings from "./pages/Settings/Settings";
+import { store } from "./Redux/store";
+import DashboardRoute from "./routes/DashboardRoute";
 import HomeRoute from "./routes/HomeRoute";
 
 const router = createBrowserRouter([
@@ -30,16 +36,40 @@ const router = createBrowserRouter([
         path: "contact",
         element: <Contacts />,
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardRoute />,
+    children: [
       {
-        path: "blog",
-        element: <Blogs />,
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+      {
+        path: "customizeai",
+        element: <Customizeai />,
+      },
+      {
+        path: "settings/addProduct",
+        element: <AddProduct />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <div className="text center"> NOT FOUND 404</div>,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
