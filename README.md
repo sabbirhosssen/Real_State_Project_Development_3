@@ -25,6 +25,7 @@ Welcome to the Notation Real Estate App — a full-featured web application buil
 ---
 
 ## 📂 Project Structure
+```bash
 backend/realStateApp/
                       ├── src/
                       │ ├── main/
@@ -40,84 +41,8 @@ backend/realStateApp/
                       ├── pom.xml
                       └── README.md
 
----
-
-## 🧰 Installation Guide (Local Setup(Backend))
-
-### 1. **Clone the Repository**
-```bash
-git clone https://github.com/sabbirhosssen/Real_State_Project_Development_3.git
-cd Real_State_Project_Development_3
-cd.\Backend\realStateApp
-
-### 2. Set Up MySQL Database
-Create a new database, e.g., realestate_db
-
-Update application.properties with your DB username & password:
-
-spring.datasource.url=jdbc:mysql://localhost:3306/realestate_db
-spring.datasource.username=YOUR_USERNAME
-spring.datasource.password=YOUR_PASSWORD
-spring.jpa.hibernate.ddl-auto=update
-
-
-Great! A well-crafted `README.md` file is essential for making your GitHub project professional and user-friendly. It explains what your project is, how to install it, and how to use it.
-
----
-
-### ✅ Here's a Sample `README.md` Template for Your Real Estate Project
-
-You can copy this and adjust it according to your actual project setup.
-
----
-
-```markdown
-# 🏠 Notation Real Estate App
-
-Welcome to the Notation Real Estate App — a full-featured web application built to manage and showcase real estate listings.
-
----
-
-## 🚀 Features
-
-- Add and manage contact inquiries
-- RESTful API built with Spring Boot
-- Frontend integration ready (e.g., React, Angular, Vue, etc.)
-- MySQL database support
-- CORS-enabled for frontend-backend communication
-
----
-
-## 🛠️ Technologies Used
-
-- **Backend**: Spring Boot (Java)
-- **Frontend**: (You can mention your framework, e.g., React, HTML/CSS, etc.)
-- **Database**: MySQL
-- **Tooling**: Maven, Git, GitHub
-
----
-
-## 📂 Project Structure
-
 ```
-
-real\_state\_app/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/sabbirhosssen/realStateApp/
-│   │   │       ├── controller/
-│   │   │       ├── model/
-│   │   │       ├── repository/
-│   │   │       └── services/
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── static/
-├── pom.xml
-└── README.md
-
-````
-
+---
 ---
 
 ## 🧰 Installation Guide (Local Setup)
@@ -126,17 +51,38 @@ real\_state\_app/
 ```bash
 git clone https://github.com/sabbirhosssen/Real_State_Project_Development_3.git
 cd Real_State_Project_Development_3
-````
+```
+### Frontend (React)
+* Go to the Frontend path:
+```bash
+cd Real_State
+```
+* Run the Frontend project
+```bash
+npm run dev
+```
+
+#### Backend (Java Spring Boot)
+*Go to the Backend path:
+```bash
+cd .\backend\realStateApp
+```
+* First you setup Intellij idea, open to project this command
+```bash
+idea64.exe
+```
 
 ### 2. **Set Up MySQL Database**
 
-* Create a new database, e.g., `realestate_db`
+* Create a new MySQL database, e.g., `realestate_db`
 * Update `application.properties` with your DB username & password:
 
 ```properties
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/realestate_db
 spring.datasource.username=YOUR_USERNAME
 spring.datasource.password=YOUR_PASSWORD
+spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 ```
 
@@ -149,7 +95,8 @@ mvn clean install
 ```
 
 ### 4. **Run the Application**
-
+* Run the Intellij idea
+or
 ```bash
 mvn spring-boot:run
 ```
@@ -157,13 +104,37 @@ mvn spring-boot:run
 ---
 
 ## 🌐 API Endpoints
-
+*Contact api
 | Method | Endpoint        | Description        |
 | ------ | --------------- | ------------------ |
 | GET    | `/api/c`        | Welcome test route |
 | POST   | `/api/contact`  | Add a new contact  |
 | GET    | `/api/contacts` | Get all contacts   |
 
+*Subscribe Api
+| Method | Endpoint           | Description             |
+| ------ | ------------------ | ----------------------- |
+| GET    | `/api/s`           | Welcome test route      |
+| POST   | `/api/subscribe`   | Add a new image generate|
+| GET    | `/api/subscribes`  | Get a image generate    |
+
+*Product Api
+| Method | Endpoint                    | Description        |
+| ------ | --------------------------- | ------------------ |
+| GET    | `/api/`                     | Welcome test route |
+| GET    | `/api/products`             | Get all products   |
+| GET    | `/api/product/{id}`         | Get a One product  |
+| GET    | `/product/{productId}/image`| Get a image product|
+| POST   | `/api/product`              | Add a new product  |
+| PUT    | `/api/product`              | Update a  product  |
+| DELETE | `/api/product/{id}`         | Delete a  product  |
+
+*Generate AI Api
+| Method | Endpoint                         | Description             |
+| ------ | -------------------------------- | ----------------------- |
+| GET    | `/ai/`                           | Welcome test route      |
+| POST   | `/ai/uploadimage`                | Add a new image generate|
+| GET    | `/ai/getloadimage/{generate_id}` | Get a image generate    |
 ---
 
 ## 📸 Screenshots (optional)
