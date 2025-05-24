@@ -25,21 +25,67 @@ Welcome to the Notation Real Estate App — a full-featured web application buil
 ---
 
 ## 📂 Project Structure
+* Frontend Folder Structure
+```bash
+Real_State/                     
+├── public/                     
+│   ├── index.html              
+│   ├── favicon.ico             
+│   └── logo192.png             
+│
+├── src/                        # Main source code
+│   ├── assets/                 
+│   │   ├── logo.png
+│   │   └── background.jpg
+│
+│   ├── components/            
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── PropertyCard.jsx
+│   │   └── ContactForm.jsx
+│
+│   ├── pages/                 
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   └── Properties.jsx
+│
+│   ├── routes/                 
+│   │   └── AppRoutes.jsx
+│
+│   ├── services/              
+│   │   └── contactService.js
+│
+│   ├── utils/                 
+│   │   └── validators.js
+│
+│   ├── App.js                  
+│   ├── App.css                 
+│   ├── index.js                
+│   └── index.css                
+│
+├── .env                           
+├── .gitignore                    
+├── package.json                 
+└── README.md                   
+```
+
+* Backend Folder Structure
 ```bash
 backend/realStateApp/
-                      ├── src/
-                      │ ├── main/
-                      │ │ ├── java/
-                      │ │ │ └── com/sabbirhosssen/realStateApp/
-                      │ │ │ ├── controller/
-                      │ │ │ ├── model/
-                      │ │ │ ├── repository/
-                      │ │ │ └── services/
-                      │ │ └── resources/
-                      │ │ ├── application.properties
-                      │ │ └── static/
-                      ├── pom.xml
-                      └── README.md
+        ├── src/
+        │ ├── main/
+        │ │ ├── java/
+        │ │ │ └── com/sabbirhosssen/realStateApp/
+        │ │ │ ├── controller/
+        │ │ │ ├── model/
+        │ │ │ ├── repository/
+        │ │ │ └── services/
+        │ │ └── resources/
+        │ │ ├── application.properties
+        │ │ └── static/
+        ├── pom.xml
+        └── README.md
 
 ```
 ---
@@ -56,6 +102,7 @@ cd Real_State_Project_Development_3
 * Go to the Frontend path:
 ```bash
 cd Real_State
+npm install
 ```
 * Run the Frontend project
 ```bash
