@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchProduct } from "../../Redux/slice/productSlice";
 
 const TestCard = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, data, isError } = useSelector((state) => state.product);
   // console.log(data);
@@ -13,21 +15,6 @@ const TestCard = () => {
   }, [dispatch]);
 
   const [productAll, setProductImageID] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get("http://localhost:8080/api/products");
-  //       setProduct(res.data);
-  //       // console.log(res.data);
-  //     } catch (error) {
-  //       console.log("Error fetching data: ", error);
-
-  //       setError(true);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     if (data && data?.length > 0 && !isError) {
@@ -57,6 +44,7 @@ const TestCard = () => {
       fetchImagesAndUpdateProducts();
     }
   }, [data]);
+  console.log(productAll);
 
   return (
     <div className="p-4">
@@ -99,8 +87,15 @@ const TestCard = () => {
                   <div className="flex items-center text-sm text-gray-600 mb-4">
                     📍 {product.productLocation}
                   </div>
-                  <button className="mt-auto bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-full">
-                    Order Now
+                  <button
+                    onClick={() =>
+                      navigate("/dashboard/bookingsummary", {
+                        state: product,
+                      })
+                    }
+                    className="mt-auto bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-full"
+                  >
+                    Booking Apartment
                   </button>
                 </div>
               </div>

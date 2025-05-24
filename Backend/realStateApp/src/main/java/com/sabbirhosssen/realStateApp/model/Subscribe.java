@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Subscribe {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-    private String email;
+    private int SubscribeId;
+    private String SubscribeEmail;
 
 }

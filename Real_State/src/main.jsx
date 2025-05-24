@@ -3,7 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
+import BookingApartment from "./components/Dashboard/BookingApartment/BookingApartment";
 import Customizeai from "./components/Dashboard/Customizeai/Customizeai";
+import GenerateAi from "./components/Dashboard/Customizeai/GenerateAi";
 import "./index.css";
 import Dashboard from "./layouts/Dashboard";
 import Aboutus from "./pages/Aboutus";
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
       {
         path: "customizeai",
         element: <Customizeai />,
+      },
+      {
+        path: "generateai",
+        element: <GenerateAi />,
+      },
+      {
+        path: "bookingsummary",
+        element: <BookingApartment />,
       },
       {
         path: "settings/addProduct",

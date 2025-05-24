@@ -1,4 +1,4 @@
-import React from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -10,7 +10,7 @@ const Sidebar = () => {
         </div>
         <ul>
           <li>
-            <Link to="customizeai" className="block py-2">
+            <Link to="generateai" className="block py-2">
               Customize now
             </Link>
           </li>
@@ -30,6 +30,18 @@ const Sidebar = () => {
             </Link>
           </li>
         </ul>
+      </div>
+
+      <div className=" fixed bottom-0 right-0 ">
+        <a
+          href="https://wa.me/15551234567"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="bg-green-500 text-white m-2 p-3 rounded-full  hover:bg-green-600 flex items-center gap-2">
+            <FaWhatsapp className="h-12 w-12" />
+          </button>
+        </a>
       </div>
     </div>
   );

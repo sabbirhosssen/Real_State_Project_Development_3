@@ -3,10 +3,10 @@ package com.sabbirhosssen.realStateApp.controller;
 import com.sabbirhosssen.realStateApp.model.Subscribe;
 import com.sabbirhosssen.realStateApp.services.SubscribeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -19,8 +19,21 @@ public class SubscribeController {
         return "hello starting the Notation Real Estate App subscribe";
     }
 
+//    @PostMapping("/subscribe")
+//    public Subscribe addSubscribe(@RequestBody Subscribe subscribe){
+//        return sub.addSubscribe(subscribe);
+//    }
     @PostMapping("/subscribe")
-    public Subscribe addSubscribe(Subscribe subscribe){
-        return sub.addSubcribe(subscribe);
+    public ResponseEntity<?> AddSubscribe(@RequestBody Subscribe subscribe){
+        try {
+            Subscribe subscribe1 = sub.addSubscribe(subscribe);
+            return new ResponseEntity<>(subscribe1, org.springframework.http.HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/subscribes")
+    public List<Subscribe> getSubscribe(){
+        return sub.getAllSubscribe();
     }
 }

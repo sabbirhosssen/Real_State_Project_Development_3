@@ -21,7 +21,7 @@ const AddProduct = () => {
     setProductData({ ...product, [name]: value });
   };
   const handleCheckboxChange = (e) => {
-    setProductData({ ...product, available: e.target.checked });
+    setProductData({ ...product, productAvailable: e.target.checked });
   };
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -134,8 +134,8 @@ const AddProduct = () => {
         <label className="block">
           <input
             type="checkbox"
-            name="available"
-            checked={!!product.available}
+            name="productAvailable"
+            checked={product.productAvailable}
             onChange={handleCheckboxChange}
           />
           <span className="ml-2">Available</span>
